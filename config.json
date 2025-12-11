@@ -1,0 +1,50 @@
+{
+  "app": {
+    "name": "Minecraft Player Monitor",
+    "version": "1.0.0",
+    "author": "Your Name",
+    "dataPath": "/storage/emulated/0/Download/MinecraftMonitor/"
+  },
+  "monitoring": {
+    "enabled": true,
+    "checkInterval": 30000,
+    "maxRetries": 3,
+    "timeout": 5000,
+    "autoStart": true
+  },
+  "notifications": {
+    "enabled": true,
+    "playerLogin": true,
+    "playerLogout": true,
+    "serverDown": true,
+    "maxPlayers": true,
+    "threshold": 20
+  },
+  "storage": {
+    "backupInterval": 86400000,
+    "maxBackups": 10,
+    "logRetentionDays": 30,
+    "autoExport": false,
+    "exportFormat": "json"
+  },
+  "web": {
+    "port": 8080,
+    "allowedHosts": ["localhost", "127.0.0.1"],
+    "enableCORS": true,
+    "requireAuth": false
+  },
+  "logging": {
+    "level": "info",
+    "maxSize": "10MB",
+    "maxFiles": 5,
+    "enableConsole": true,
+    "enableFile": true
+  },
+  "ui": {
+    "theme": "dark",
+    "refreshRate": 10000,
+    "showOfflineServers": true,
+    "compactMode": false,
+    "animations": true
+  }
+}

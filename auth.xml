@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<authentication>
+    <!-- Basic authentication settings -->
+    <enabled>false</enabled>
+    
+    <!-- Users (username/password) -->
+    <users>
+        <user>
+            <username>admin</username>
+            <password>minecraft</password>
+            <role>admin</role>
+            <permissions>
+                <permission>view_servers</permission>
+                <permission>manage_servers</permission>
+                <permission>view_players</permission>
+                <permission>export_data</permission>
+                <permission>manage_settings</permission>
+            </permissions>
+        </user>
+        <user>
+            <username>viewer</username>
+            <password>viewonly</password>
+            <role>viewer</role>
+            <permissions>
+                <permission>view_servers</permission>
+                <permission>view_players</permission>
+            </permissions>
+        </user>
+    </users>
+    
+    <!-- Session settings -->
+    <session>
+        <timeout>3600</timeout> <!-- 1 hour in seconds -->
+        <remember_me>true</remember_me>
+        <secure_cookies>false</secure_cookies>
+    </session>
+    
+    <!-- Security settings -->
+    <security>
+        <max_login_attempts>5</max_login_attempts>
+        <lockout_time>900</lockout_time> <!-- 15 minutes -->
+        <require_https>false</require_https>
+        <password_policy>
+            <min_length>8</min_length>
+            <require_uppercase>true</require_uppercase>
+            <require_lowercase>true</require_lowercase>
+            <require_numbers>true</require_numbers>
+            <require_special>false</require_special>
+        </password_policy>
+    </security>
+    
+    <!-- OAuth providers (optional) -->
+    <oauth>
+        <google>
+            <enabled>false</enabled>
+            <client_id></client_id>
+            <client_secret></client_secret>
+        </google>
+        <github>
+            <enabled>false</enabled>
+            <client_id></client_id>
+            <client_secret></client_secret>
+        </github>
+    </oauth>
+</authentication>

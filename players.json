@@ -1,0 +1,54 @@
+{
+  "players": [
+    {
+      "id": "1",
+      "username": "PlayerOne",
+      "uuid": "12345678-1234-1234-1234-123456789012",
+      "firstSeen": "2024-01-01T10:00:00Z",
+      "lastSeen": "2024-01-01T14:30:00Z",
+      "totalPlayTime": 3600,
+      "sessions": 12,
+      "currentServer": "Hypixel Network",
+      "isOnline": false,
+      "lastIP": "192.168.1.1",
+      "rank": "Member",
+      "notes": "Active player",
+      "favorite": false
+    },
+    {
+      "id": "2",
+      "username": "MinecraftPro",
+      "uuid": "87654321-4321-4321-4321-210987654321",
+      "firstSeen": "2024-01-01T09:00:00Z",
+      "lastSeen": "2024-01-01T16:45:00Z",
+      "totalPlayTime": 7200,
+      "sessions": 24,
+      "currentServer": "Hypixel Network",
+      "isOnline": true,
+      "lastIP": "192.168.1.2",
+      "rank": "Admin",
+      "notes": "Server administrator",
+      "favorite": true
+    }
+  ],
+  "sessions": [
+    {
+      "id": "1",
+      "playerId": "1",
+      "playerName": "PlayerOne",
+      "server": "Hypixel Network",
+      "loginTime": "2024-01-01T10:00:00Z",
+      "logoutTime": "2024-01-01T11:00:00Z",
+      "duration": 3600,
+      "ipAddress": "192.168.1.1"
+    }
+  ],
+  "statistics": {
+    "totalPlayers": 2,
+    "totalSessions": 36,
+    "totalPlayTime": 10800,
+    "uniqueToday": 2,
+    "peakPlayers": 10,
+    "peakTime": "2024-01-01T15:00:00Z"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "enabled": true,
+  "sound": true,
+  "desktop": true,
+  "mobile": true,
+  "triggers": [
+    {
+      "id": "player_login",
+      "name": "Player Login",
+      "enabled": true,
+      "message": "{player} logged into {server}",
+      "sound": "login.mp3",
+      "priority": "info"
+    },
+    {
+      "id": "player_logout",
+      "name": "Player Logout",
+      "enabled": true,
+      "message": "{player} logged out from {server}",
+      "sound": "logout.mp3",
+      "priority": "info"
+    },
+    {
+      "id": "server_online",
+      "name": "Server Online",
+      "enabled": true,
+      "message": "{server} is now online",
+      "sound": "success.mp3",
+      "priority": "success"
+    },
+    {
+      "id": "server_offline",
+      "name": "Server Offline",
+      "enabled": true,
+      "message": "{server} is offline",
+      "sound": "error.mp3",
+      "priority": "error"
+    },
+    {
+      "id": "high_player_count",
+      "name": "High Player Count",
+      "enabled": true,
+      "threshold": 50,
+      "message": "{server} has {count} players online",
+      "sound": "warning.mp3",
+      "priority": "warning"
+    }
+  ],
+  "snooze": {
+    "enabled": false,
+    "until": null,
+    "duration": 3600000
+  },
+  "history": [
+    {
+      "id": "1",
+      "type": "player_login",
+      "message": "PlayerOne logged into Hypixel Network",
+      "timestamp": "2024-01-01T10:00:00Z",
+      "read": true
+    }
+  ]
+}

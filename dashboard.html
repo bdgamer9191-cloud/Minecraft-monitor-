@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Minecraft Dashboard</title>
+    <link rel="stylesheet" href="web.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-gamepad"></i>
+                <h2>Minecraft Monitor</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#overview" class="nav-item active">
+                    <i class="fas fa-tachometer-alt"></i> Overview
+                </a>
+                <a href="#servers" class="nav-item">
+                    <i class="fas fa-server"></i> Servers
+                </a>
+                <a href="#players" class="nav-item">
+                    <i class="fas fa-users"></i> Players
+                </a>
+                <a href="#analytics" class="nav-item">
+                    <i class="fas fa-chart-line"></i> Analytics
+                </a>
+                <a href="#logs" class="nav-item">
+                    <i class="fas fa-history"></i> Activity Log
+                </a>
+                <a href="#settings" class="nav-item">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="status">
+                    <span class="status-dot online"></span>
+                    <span>Monitoring Active</span>
+                </div>
+                <button class="btn-mobile" onclick="window.location.href='index.html'">
+                    <i class="fas fa-mobile-alt"></i> Mobile View
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="content-header">
+                <h1 id="pageTitle">Dashboard Overview</h1>
+                <div class="header-actions">
+                    <button class="btn-action" onclick="refreshData()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <button class="btn-action" onclick="exportDashboardData()">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                    <button class="btn-action" onclick="toggleMonitoring()">
+                        <i class="fas fa-pause"></i> Pause
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Overview Section -->
+                <section id="overview" class="dashboard-section active">
+                    <div class="stats-cards">
+                        <div class="stat-card-large">
+                            <i class="fas fa-server"></i>
+                            <div class="stat-content">
+                                <h3 id="totalServers">0</h3>
+                                <p>Total Servers</p>
+                                <small id="onlineServers">0 online</small>
+                            </div>
+                        </div>
+                        <div class="stat-card-large">
+                            <i class="fas fa-users"></i>
+                            <div class="stat-content">
+                                <h3 id="totalPlayers">0</h3>
+                                <p>Online Players</p>
+                                <small id="uniquePlayers">0 unique today</small>
+                            </div>
+                        </div>
+                        <div class="stat-card-large">
+                            <i class="fas fa-clock"></i>
+                            <div class="stat-content">
+                                <h3 id="totalUptime">0h</h3>
+                                <p>Total Uptime</p>
+                                <small id="avgLatency">Avg: 0ms</small>
+                            </div>
+                        </div>
+                        <div class="stat-card-large">
+                            <i class="fas fa-chart-bar"></i>
+                            <div class="stat-content">
+                                <h3 id="totalSessions">0</h3>
+                                <p>Today's Sessions</p>
+                                <small id="playTime">0 hours played</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="charts-grid">
+                        <div class="chart-container">
+                            <h3><i class="fas fa-signal"></i> Server Status</h3>
+                            <canvas id="serverStatusChart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h3><i class="fas fa-user-clock"></i> Player Activity</h3>
+                            <canvas id="playerActivityChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="recent-activity">
+                        <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                        <div id="recentActivityList" class="activity-list">
+                            <!-- Activity items will be loaded here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Servers Section -->
+                <section id="servers" class="dashboard-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-server"></i> Managed Servers</h2>
+                        <button class="btn-primary" onclick="showAddServerModal()">
+                            <i class="fas fa-plus"></i> Add Server
+                        </button>
+                    </div>
+                    <div id="dashboardServerList" class="server-grid">
+                        <!-- Servers will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Players Section -->
+                <section id="players" class="dashboard-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-users"></i> Player Management</h2>
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="playerSearch" placeholder="Search players...">
+                        </div>
+                    </div>
+                    <div id="playerTableContainer">
+                        <table class="player-table">
+                            <thead>
+                                <tr>
+                                    <th>Player Name</th>
+                                    <th>Status</th>
+                                    <th>Current Server</th>
+                                    <th>Play Time</th>
+                                    <th>Last Seen</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="playerTableBody">
+                                <!-- Players will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Analytics Section -->
+                <section id="analytics" class="dashboard-section">
+                    <h2><i class="fas fa-chart-line"></i> Analytics</h2>
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <h3>Player Activity Timeline</h3>
+                            <canvas id="timelineChart"></canvas>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>Server Popularity</h3>
+                            <canvas id="popularityChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Logs Section -->
+                <section id="logs" class="dashboard-section">
+                    <h2><i class="fas fa-history"></i> System Logs</h2>
+                    <div class="log-filters">
+                        <select id="logLevelFilter">
+                            <option value="all">All Levels</option>
+                            <option value="info">Info</option>
+                            <option value="warning">Warning</option>
+                            <option value="error">Error</option>
+                        </select>
+                        <input type="date" id="logDateFilter">
+                        <button class="btn-secondary" onclick="clearLogs()">
+                            <i class="fas fa-trash"></i> Clear Logs
+                        </button>
+                    </div>
+                    <div id="systemLogs" class="system-logs">
+                        <!-- System logs will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="dashboard-section">
+                    <h2><i class="fas fa-cog"></i> Settings</h2>
+                    <div class="settings-grid">
+                        <div class="settings-card">
+                            <h3><i class="fas fa-bell"></i> Notifications</h3>
+                            <div class="setting">
+                                <label>
+                                    <input type="checkbox" id="webNotifyLogin" checked>
+                                    Player login notifications
+                                </label>
+                            </div>
+                            <div class="setting">
+                                <label>
+                                    <input type="checkbox" id="webNotifyLogout">
+                                    Player logout notifications
+                                </label>
+                            </div>
+                            <div class="setting">
+                                <label>
+                                    <input type="checkbox" id="webNotifyServerDown">
+                                    Server downtime alerts
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3><i class="fas fa-database"></i> Data Management</h3>
+                            <div class="setting">
+                                <label>Auto-backup interval:</label>
+                                <select id="backupInterval">
+                                    <option value="1">Every hour</option>
+                                    <option value="6">Every 6 hours</option>
+                                    <option value="24" selected>Daily</option>
+                                    <option value="168">Weekly</option>
+                                </select>
+                            </div>
+                            <div class="setting">
+                                <label>Keep logs for:</label>
+                                <select id="logRetention">
+                                    <option value="7">7 days</option>
+                                    <option value="30" selected>30 days</option>
+                                    <option value="90">90 days</option>
+                                    <option value="365">1 year</option>
+                                </select>
+                            </div>
+                            <button class="btn-primary" onclick="saveSettings()">
+                                <i class="fas fa-save"></i> Save Settings
+                            </button>
+                        </div>
+
+                        <div class="settings-card">
+                            <h3><i class="fas fa-info-circle"></i> System Info</h3>
+                            <div class="info-item">
+                                <strong>Version:</strong> 1.0.0
+                            </div>
+                            <div class="info-item">
+                                <strong>Data Path:</strong> 
+                                <code>/storage/emulated/0/Download/MinecraftMonitor/</code>
+                            </div>
+                            <div class="info-item">
+                                <strong>Last Backup:</strong> 
+                                <span id="lastBackupTime">Never</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Database Size:</strong> 
+                                <span id="dbSize">0 KB</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Server Modal -->
+    <div id="dashboardServerModal" class="modal">
+        <div class="modal-content">
+            <!-- Same as mobile modal -->
+        </div>
+    </div>
+
+    <script src="utils.js"></script>
+    <script src="database.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

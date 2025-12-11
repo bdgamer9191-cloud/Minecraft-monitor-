@@ -1,0 +1,6 @@
+2024-01-01T12:00:00Z INFO: Minecraft Monitor started
+2024-01-01T12:00:01Z INFO: Loading configuration
+2024-01-01T12:00:02Z INFO: Database initialized
+2024-01-01T12:00:03Z INFO: Loaded 3 servers from config
+2024-01-01T12:00:04Z INFO: UI initialized successfully
+2024-01-01T12:00:05Z INFO: Ready for monitoring
